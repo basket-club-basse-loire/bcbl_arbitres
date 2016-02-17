@@ -1,0 +1,13 @@
+Les arbitres officiant lors des compétitions régionales et départementales sont
+<table>
+<tr>
+<td><img src="http://bcbl.free.fr/sites/default/files/chloe_colliou.jpg" height="200px"/><p>Chloé COLLIOU</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/julie_colliou.jpg" height="200px"/><p>Julie COLLIOU</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/matthieu_morand.jpg" height="200px"/><p>Mathieu MORAND</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/tiphaine_rochias_site.jpg" height="200px"/><p>Tiphaine ROCHIAS</p></td>
+</tr>
+</table> 
+
+<p>
+Convocations à venir de nos arbitres:
+</p>
