@@ -6,6 +6,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="bcbl.officiel.convocation.ConvocationsOfficiel"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-extract ${workspace_loc}/bcbl_arbitres/tests/Designations_officiels_du_club_20160216.xls -output ${workspace_loc}/bcbl_arbitres/tests/output.html -prolog ${workspace_loc}/bcbl_arbitres/data/prolog.txt -overwrite"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-extract ${workspace_loc}/bcbl_arbitres/tests/Designations_officiels_du_club_20160308.xls -output ${workspace_loc}/bcbl_arbitres/tests/output.html -prolog ${workspace_loc}/bcbl_arbitres/data/prolog.txt -overwrite"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="bcbl_arbitres"/>
 </launchConfiguration>
