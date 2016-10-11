@@ -67,7 +67,7 @@ public class ConvocationsOfficiel {
 				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fOutput)));
 			}
 			
-			writer.write("<html><body>");
+			writer.write("<html><meta charset=\"UTF-8\"><body>");
 			writer.newLine();
 			
 			if (prolog != null) {
