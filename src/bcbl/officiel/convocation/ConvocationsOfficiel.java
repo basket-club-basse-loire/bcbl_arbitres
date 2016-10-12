@@ -91,8 +91,10 @@ public class ConvocationsOfficiel {
 
 			String nom = "";
 			String prenom = "";
+			String fonction = "";
 			for (int rowIndex = 8; rowIndex < rows; rowIndex++) {
 				HSSFRow row = extractFbiSheet.getRow(rowIndex);
+				
 				String s = row.getCell(0).getStringCellValue();
 				if (s != null && !s.isEmpty()) {
 					nom = s;
@@ -101,28 +103,36 @@ public class ConvocationsOfficiel {
 				if (s != null && !s.isEmpty()) {
 					prenom = s;
 				}
-				String equipe1 = row.getCell(7).getStringCellValue();
-				String equipe2 = row.getCell(8).getStringCellValue();
-				String categorie = row.getCell(11).getStringCellValue();
-				
-				Date date = row.getCell(13).getDateCellValue();
-				double heure = row.getCell(14).getNumericCellValue();
-				date.setHours((int)heure/100);
-				date.setMinutes((int)heure%100);
-				
-				writer.write("<tr>");
-				String[] values = new String[] {
-					nom + " " + prenom,
-					dateFormat.format(date),
-					heureFormat.format(date),
-					categorie,
-					"<b>" + equipe1 + "</b> vs " + equipe2
-				};
-				for (String value: values) {
-					writer.write("<td>" + value + "</td>");
+				s = row.getCell(2).getStringCellValue();
+				if (s != null && !s.isEmpty()) {
+					fonction = s;
 				}
-				writer.write("</tr>");
-				writer.newLine();
+				// On s'assure qu'il s'agit bien d'un arbitre officiel
+				
+				if ("ARBITRE".equals(fonction)) {
+					String equipe1 = row.getCell(7).getStringCellValue();
+					String equipe2 = row.getCell(8).getStringCellValue();
+					String categorie = row.getCell(11).getStringCellValue();
+					
+					Date date = row.getCell(13).getDateCellValue();
+					double heure = row.getCell(14).getNumericCellValue();
+					date.setHours((int)heure/100);
+					date.setMinutes((int)heure%100);
+					
+					writer.write("<tr>");
+					String[] values = new String[] {
+						nom + " " + prenom,
+						dateFormat.format(date),
+						heureFormat.format(date),
+						categorie,
+						"<b>" + equipe1 + "</b> vs " + equipe2
+					};
+					for (String value: values) {
+						writer.write("<td>" + value + "</td>");
+					}
+					writer.write("</tr>");
+					writer.newLine();
+				}
 			}
 			
 			writer.write("</tbody>");
