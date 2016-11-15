@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,14 +17,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class ConvocationsOfficiel {
 	public static void main(String[] args) {
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat();
 		dateFormat.applyPattern("dd MMM yyyy");
-		
+
 		SimpleDateFormat heureFormat = new SimpleDateFormat();
 		heureFormat.applyPattern("HH:mm");
 
-		
 		String extract = null;
 		String output = null;
 		String prolog = null;
@@ -66,10 +64,10 @@ public class ConvocationsOfficiel {
 			} else {
 				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fOutput)));
 			}
-			
+
 			writer.write("<html><meta charset=\"UTF-8\"><body>");
 			writer.newLine();
-			
+
 			if (prolog != null) {
 				BufferedReader br = new BufferedReader(new FileReader(prolog));
 				String line = br.readLine();
@@ -82,9 +80,12 @@ public class ConvocationsOfficiel {
 
 			int rows = extractFbiSheet.getPhysicalNumberOfRows();
 			
+			System.out.println("Number of rows:" + rows);
+
 			writer.write("<table>");
 			writer.newLine();
-			writer.write("<thead><th>Arbitre</th><th>Date</th><th>Heure</th><th>Catégorie</th><th>Match (en gras - équipe recevant)</th></thead>");
+			writer.write(
+					"<thead><th>Arbitre</th><th>Date</th><th>Heure</th><th>Catégorie</th><th>Match (en gras - équipe recevant)</th></thead>");
 			writer.newLine();
 			writer.write("<tbody>");
 			writer.newLine();
@@ -94,47 +95,52 @@ public class ConvocationsOfficiel {
 			String fonction = "";
 			for (int rowIndex = 8; rowIndex < rows; rowIndex++) {
 				HSSFRow row = extractFbiSheet.getRow(rowIndex);
-				
-				String s = row.getCell(0).getStringCellValue();
-				if (s != null && !s.isEmpty()) {
-					nom = s;
-				}
-				s = row.getCell(1).getStringCellValue();
-				if (s != null && !s.isEmpty()) {
-					prenom = s;
-				}
-				s = row.getCell(2).getStringCellValue();
-				if (s != null && !s.isEmpty()) {
-					fonction = s;
-				}
-				// On s'assure qu'il s'agit bien d'un arbitre officiel
-				
-				if ("ARBITRE".equals(fonction)) {
-					String equipe1 = row.getCell(7).getStringCellValue();
-					String equipe2 = row.getCell(8).getStringCellValue();
-					String categorie = row.getCell(11).getStringCellValue();
-					
-					Date date = row.getCell(13).getDateCellValue();
-					double heure = row.getCell(14).getNumericCellValue();
-					date.setHours((int)heure/100);
-					date.setMinutes((int)heure%100);
-					
-					writer.write("<tr>");
-					String[] values = new String[] {
-						nom + " " + prenom,
-						dateFormat.format(date),
-						heureFormat.format(date),
-						categorie,
-						"<b>" + equipe1 + "</b> vs " + equipe2
-					};
-					for (String value: values) {
-						writer.write("<td>" + value + "</td>");
+
+				if (row != null && row.getPhysicalNumberOfCells() > 0) {
+					System.out.println("Row " + rowIndex + " - number of cells : " + row.getPhysicalNumberOfCells());
+					String s = null;
+					try {
+						s = row.getCell(2).getStringCellValue();
+					} catch (Exception e) {
+
 					}
-					writer.write("</tr>");
-					writer.newLine();
+					if (s != null && !s.isEmpty()) {
+						fonction = s;
+					}
+					// On s'assure qu'il s'agit bien d'un arbitre officiel
+
+					if ("ARBITRE".equals(fonction)) {
+
+						s = row.getCell(0).getStringCellValue();
+						if (s != null && !s.isEmpty()) {
+							nom = s;
+						}
+						s = row.getCell(1).getStringCellValue();
+						if (s != null && !s.isEmpty()) {
+							prenom = s;
+						}
+
+						String equipe1 = row.getCell(7).getStringCellValue();
+						String equipe2 = row.getCell(8).getStringCellValue();
+						String categorie = row.getCell(11).getStringCellValue();
+
+						Date date = row.getCell(13).getDateCellValue();
+						double heure = row.getCell(14).getNumericCellValue();
+						date.setHours((int) heure / 100);
+						date.setMinutes((int) heure % 100);
+
+						writer.write("<tr>");
+						String[] values = new String[] { nom + " " + prenom, dateFormat.format(date),
+								heureFormat.format(date), categorie, "<b>" + equipe1 + "</b> vs " + equipe2 };
+						for (String value : values) {
+							writer.write("<td>" + value + "</td>");
+						}
+						writer.write("</tr>");
+						writer.newLine();
+					}
 				}
 			}
-			
+
 			writer.write("</tbody>");
 			writer.newLine();
 			writer.write("</table>");
