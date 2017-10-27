@@ -109,7 +109,7 @@ public class ConvocationsOfficiel {
 					}
 					// On s'assure qu'il s'agit bien d'un arbitre officiel
 
-					if ("ARBITRE".equals(fonction)) {
+					if ("ARBITRE".equalsIgnoreCase(fonction)) {
 
 						s = row.getCell(0).getStringCellValue();
 						if (s != null && !s.isEmpty()) {

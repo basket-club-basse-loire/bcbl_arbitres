@@ -1,9 +1,9 @@
 Les arbitres officiant lors des compétitions régionales et départementales sont
 <table>
 <tr>
-<td><img src="http://bcbl.free.fr/sites/default/files/photo_frederic_pruvost_site.jpg" height="200px"/><p>Frédéric PRUVOST</p></td>
-<td><img src="http://bcbl.free.fr/sites/default/files/photo_tiphaine_rochias_site.jpg" height="200px"/><p>Tiphaine ROCHIAS</p></td>
-<td><img src="http://bcbl.free.fr/sites/default/files/photo_nicolas_sauvage_site.jpg" height="200px"/><p>Nicolas SAUVAGE</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/photo_erwan_gendek_site.jpg" height="170px"/><p>Erwan GENDEK</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/photo_tiphaine_rochias_site.jpg" height="170px"/><p>Tiphaine ROCHIAS</p></td>
+<td><img src="http://bcbl.free.fr/sites/default/files/photo_nicolas_sauvage_site.jpg" height="170px"/><p>Nicolas SAUVAGE</p></td>
 </tr>
 </table> 
 
