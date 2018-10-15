@@ -93,6 +93,7 @@ public class ConvocationsOfficiel {
 			String nom = "";
 			String prenom = "";
 			String fonction = "";
+			String categorie = "";
 			for (int rowIndex = 8; rowIndex < rows; rowIndex++) {
 				HSSFRow row = extractFbiSheet.getRow(rowIndex);
 
@@ -120,9 +121,11 @@ public class ConvocationsOfficiel {
 							prenom = s;
 						}
 
-						String equipe1 = row.getCell(7).getStringCellValue();
-						String equipe2 = row.getCell(8).getStringCellValue();
-						String categorie = row.getCell(11).getStringCellValue();
+						String equipe1 = normalizeNomEquipe(row.getCell(7).getStringCellValue());
+						String equipe2 = normalizeNomEquipe(row.getCell(8).getStringCellValue());
+						if (!row.getCell(5).getStringCellValue().trim().isEmpty()) { 
+							categorie = row.getCell(5).getStringCellValue();
+						}
 
 						Date date = row.getCell(13).getDateCellValue();
 						double heure = row.getCell(14).getNumericCellValue();
@@ -155,6 +158,15 @@ public class ConvocationsOfficiel {
 			ioe.printStackTrace();
 		}
 
+	}
+	
+	public static String normalizeNomEquipe(String equipe) {
+		// Supprimer les - 1 ou - 2 en fin de nom d'équipe
+		int idx = equipe.lastIndexOf('-');
+		if (idx > 0) {
+			return equipe.substring(0, idx);
+		}
+		return equipe;
 	}
 
 }
